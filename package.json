@@ -4,11 +4,14 @@
   "description": "Cloning Youtube with Vanilla and NodeJS",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "babel-node index.js"
   },
   "author": "LEE Seungje",
   "license": "ISC",
   "dependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
     "express": "^4.17.1"
   }
 }
