@@ -1,6 +1,11 @@
 import app from "./app";
+import "./db";
+import dotenv from "dotenv";
+import "./models/Video";
 
-const PORT = 4000;
+dotenv.config();
+
+const PORT = process.env.PORT;
 
 const handleListening = () =>
   console.log(`Listening on: http://localhost:${PORT}`);
