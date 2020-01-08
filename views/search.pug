@@ -5,10 +5,13 @@ block content
     .search__header
         h3 Searching for: #{searching}
     .search__result
+        if videos.length === 0
+            h5 No Videos Found
         each video in videos
             +videoBlock({
-                thumbnail:video.videoFile,
+                videoFile:video.videoFile,
                 title:video.title,
                 views:video.views,
+                id:video.id
             })
 
