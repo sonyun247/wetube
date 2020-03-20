@@ -27,6 +27,11 @@ const VIDEO_DETAIL = "/:id";
 const EDIT_VIDEO = "/:id/edit";
 const DELETE_VIDEO = "/:id/delete";
 
+// API
+const API = "/api";
+const REGISTER_VIEW = "/:id/view";
+const ADD_COMMENT = "/:id/comment";
+
 const routes = {
   home: HOME,
   search: SEARCH,
@@ -66,7 +71,10 @@ const routes = {
   github: GITHUB,
   githubCallback: GITHUB_CALLBACK,
   facebook: FACEBOOK,
-  facebookCallback: FACEBOOK_CALLBACK
+  facebookCallback: FACEBOOK_CALLBACK,
+  api: API,
+  registerView: REGISTER_VIEW,
+  addComment: ADD_COMMENT
 };
 
 export default routes;
