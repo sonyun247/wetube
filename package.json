@@ -12,7 +12,7 @@
     "build": "npm run build:server && npm run build:assets && npm run copyAll",
     "prebuild": "rm -rf build",
     "tunnel": "ngrok http 4000",
-    "start": "node build/init.js",
+    "start": "PRODUCTION=true node build/init.js",
     "prestart": "npm run build"
   },
   "nodemonConfig": {
@@ -41,6 +41,7 @@
     "css-loader": "^3.4.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "express-flash": "0.0.2",
     "express-session": "^1.17.0",
     "get-blob-duration": "^1.1.0",
     "helmet": "^3.21.2",
