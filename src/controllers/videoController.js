@@ -1,6 +1,7 @@
 import routes from "../routes";
 import Video from "../models/Video";
 import Comment from "../models/Comment";
+import { s3 } from "../middlewares";
 
 export const home = async (req, res) => {
   try {
@@ -29,11 +30,11 @@ export const getUpload = (req, res) =>
   res.render("upload", { pageTitle: "Upload" });
 export const postUpload = async (req, res) => {
   const {
-    file: { path },
+    file: { location },
     body: { title, description }
   } = req;
   const newVideo = await Video.create({
-    fileUrl: path,
+    fileUrl: location,
     title,
     description,
     creator: req.user.id
@@ -91,10 +92,17 @@ export const deleteVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
+    const url = video.fileUrl.split("/");
+    const delFileName = url[url.length - 1];
+    const params = {
+      Bucket: "wetube-sonyun24/video",
+      Key: delFileName
+    };
     if (video.creator !== req.user.id) {
       throw Error();
     } else {
       await Video.findOneAndDelete({ _id: id });
+      await s3.deleteObject(params);
     }
   } catch (error) {
     console.log(error);

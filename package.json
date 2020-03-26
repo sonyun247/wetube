@@ -4,10 +4,16 @@
   "description": "Cloning Youtube with Vanilla and NodeJS",
   "main": "index.js",
   "scripts": {
-    "dev:server": "nodemon --exec babel-node init.js",
-    "dev:assets": "WEBPACK_ENV=development webpack -w",
-    "build:assets": "WEBPACK_ENV=production webpack",
-    "tunnel": "ngrok http 4000"
+    "dev:server": "nodemon --exec babel-node src/init.js",
+    "dev:assets": "cd src && WEBPACK_ENV=development webpack -w",
+    "build:assets": "cd src && WEBPACK_ENV=production webpack",
+    "build:server": "babel src --out-dir build --ignore 'src/assets','src/static','src/webpack.config.js'",
+    "copyAll": "cp -R src/static build && cp -R src/views build",
+    "build": "npm run build:server && npm run build:assets && npm run copyAll",
+    "prebuild": "rm -rf build",
+    "tunnel": "ngrok http 4000",
+    "start": "node build/init.js",
+    "prestart": "npm run build"
   },
   "nodemonConfig": {
     "delay": "2000",
@@ -23,7 +29,9 @@
     "@babel/node": "^7.7.7",
     "@babel/polyfill": "^7.7.0",
     "@babel/preset-env": "^7.7.7",
+    "@babel/runtime": "^7.9.2",
     "autoprefixer": "^9.7.3",
+    "aws-sdk": "^2.646.0",
     "axios": "^0.19.2",
     "babel-loader": "^8.0.6",
     "body-parser": "^1.19.0",
@@ -39,6 +47,7 @@
     "mongoose": "^5.8.4",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
+    "multer-s3": "^2.9.0",
     "node-sass": "^4.13.0",
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
@@ -52,9 +61,10 @@
     "webpack-cli": "^3.3.10"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.9.0",
     "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-prettier": "^3.1.2",
     "nodemon": "^2.0.2",
