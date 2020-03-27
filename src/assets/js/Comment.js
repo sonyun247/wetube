@@ -26,12 +26,12 @@ const addComment = comment => {
 };
 
 const delComment = commentId => {
-  deleteBtns.forEach(deleteBtn => {
-    if (deleteBtn === commentId) {
-      deleteBtn.parentElement.remove();
+  for (let i = 0; i < deleteBtns.length; i += 1) {
+    if (deleteBtns[i].value === commentId) {
+      deleteBtns[i].parentElement.remove();
       decreaseNumber();
     }
-  });
+  }
 };
 
 const sendComment = async comment => {
@@ -75,9 +75,9 @@ const handleDelete = async event => {
 
 function init() {
   addCommentForm.addEventListener("submit", handleSubmit);
-  deleteBtns.forEach(deleteBtn => {
-    deleteBtn.addEventListener("click", handleDelete);
-  });
+  for (let i = 0; i < deleteBtns.length; i += 1) {
+    deleteBtns[i].addEventListener("click", handleDelete);
+  }
 }
 
 init();
