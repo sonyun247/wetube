@@ -26,12 +26,10 @@ const addComment = comment => {
 };
 
 const delComment = target => {
-  try {
-    const span = target.parentNode;
-    const list = span.parentNode;
-    commentList.removeChild(list);
-    decreaseNumber();
-  } catch (error) {}
+  const span = target.parentNode;
+  const list = span.parentNode;
+  commentList.removeChild(list);
+  decreaseNumber();
 };
 
 const sendComment = async comment => {
@@ -57,6 +55,7 @@ const handleSubmit = event => {
 };
 
 const handleDelete = async event => {
+  event.preventDefault();
   const videoId = window.location.href.split("/videos/")[1];
   const { target } = event;
   const commentId = target.id;
