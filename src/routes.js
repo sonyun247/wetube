@@ -31,6 +31,7 @@ const DELETE_VIDEO = "/:id/delete";
 const API = "/api";
 const REGISTER_VIEW = "/:id/view";
 const ADD_COMMENT = "/:id/comment";
+const DEL_COMMENT = "/:id/deleteComment";
 
 const routes = {
   home: HOME,
@@ -74,7 +75,8 @@ const routes = {
   facebookCallback: FACEBOOK_CALLBACK,
   api: API,
   registerView: REGISTER_VIEW,
-  addComment: ADD_COMMENT
+  addComment: ADD_COMMENT,
+  delComment: DEL_COMMENT
 };
 
 export default routes;

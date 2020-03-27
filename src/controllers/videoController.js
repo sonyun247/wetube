@@ -104,7 +104,7 @@ export const deleteVideo = async (req, res) => {
       throw Error();
     } else {
       await Video.findOneAndDelete({ _id: id });
-      await s3.deleteObject(params, function(err, data) {
+      s3.deleteObject(params, function(err, data) {
         if (err) {
           console.log(err);
         } else {
@@ -150,6 +150,24 @@ export const postAddComment = async (req, res) => {
     video.save();
   } catch (error) {
     res.status(400);
+  } finally {
+    res.end();
+  }
+};
+
+export const postDelComment = async (req, res) => {
+  const {
+    body: { commentId },
+    user
+  } = req;
+  try {
+    const comment = await Comment.findById(commentId);
+    if (String(comment.creator) === user.id) {
+      await comment.remove();
+    }
+  } catch (error) {
+    res.status(400);
+    console.log(error);
   } finally {
     res.end();
   }
