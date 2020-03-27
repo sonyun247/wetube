@@ -64,10 +64,11 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
-    // 오류 아이디값다름
-    if (video.creator !== req.user.id) {
+    if (String(video.creator) !== req.user.id) {
+      console.log(typeof video.creator, typeof req.user.id);
       throw Error();
     } else {
+      console.log(video.creator, req.user.id);
       res.render("editVideo", { pageTitle: `Edit ${video.title}`, video });
     }
   } catch (error) {
@@ -99,11 +100,17 @@ export const deleteVideo = async (req, res) => {
       Bucket: "wetube-sonyun24/video",
       Key: delFileName
     };
-    if (video.creator !== req.user.id) {
+    if (String(video.creator) !== req.user.id) {
       throw Error();
     } else {
       await Video.findOneAndDelete({ _id: id });
-      await s3.deleteObject(params);
+      await s3.deleteObject(params, function(err, data) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(data);
+        }
+      });
     }
   } catch (error) {
     console.log(error);
