@@ -162,7 +162,7 @@ export const postDelComment = async (req, res) => {
   } = req;
   try {
     const comment = await Comment.findById(commentId);
-    if (String(comment.creator) === user.id) {
+    if (comment.creator === user.id) {
       await comment.remove();
     }
   } catch (error) {
