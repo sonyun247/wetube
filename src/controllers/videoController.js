@@ -64,6 +64,7 @@ export const getEditVideo = async (req, res) => {
   } = req;
   try {
     const video = await Video.findById(id);
+    // 오류 아이디값다름
     if (video.creator !== req.user.id) {
       throw Error();
     } else {
