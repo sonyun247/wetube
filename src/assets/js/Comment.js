@@ -16,7 +16,7 @@ const addComment = comment => {
   const li = document.createElement("li");
   const span = document.createElement("span");
   const deleteBtn = document.createElement("span");
-  deleteBtn.classList.add("video__comments-btn-delete");
+  deleteBtn.classList.add("video__comments-btn-del");
   deleteBtn.innerHTML = "X";
   span.innerHTML = comment;
   li.appendChild(span);
