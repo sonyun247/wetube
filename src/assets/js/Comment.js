@@ -28,10 +28,10 @@ const addComment = comment => {
 const delComment = commentId => {
   deleteBtns.forEach(deleteBtn => {
     if (deleteBtn === commentId) {
-      deleteBtn.remove();
+      deleteBtn.parentElement.remove();
+      decreaseNumber();
     }
   });
-  decreaseNumber();
 };
 
 const sendComment = async comment => {
@@ -58,7 +58,9 @@ const handleSubmit = event => {
 
 const handleDelete = async event => {
   const videoId = window.location.href.split("/videos/")[1];
-  const commentId = event.target.value;
+  const {
+    target: { value: commentId }
+  } = event;
   const response = await axios({
     url: `/api/${videoId}/deleteComment`,
     method: "POST",
@@ -66,7 +68,6 @@ const handleDelete = async event => {
       commentId
     }
   });
-  console.log(commentId, typeof commentId);
   if (response.status === 200) {
     delComment(commentId);
   }
