@@ -66,6 +66,7 @@ const handleDelete = async event => {
       commentId
     }
   });
+  console.log(commentId, typeof commentId);
   if (response.status === 200) {
     delComment(commentId);
   }
