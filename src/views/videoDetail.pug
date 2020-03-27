@@ -35,4 +35,4 @@ block content
                     li
                         span=comment.text 
                         if loggedUser && String(comment.creator) === loggedUser.id
-                            span.video__comments-btn-del(value=comment.id) X
+                            span.video__comments-btn-del(id=String(comment.id)) X
